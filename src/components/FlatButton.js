@@ -13,9 +13,6 @@ import extend from 'jss-extend'
 import {create} from 'jss'
 let jss = create()
 
-const mouseDown = createAction('MOUSE_DOWN')
-const mouseUp = createAction('MOUSE_UP')
-
 const {
   spacing,
   fontFamily,
@@ -36,6 +33,7 @@ const styles = jss
       lineHeight: buttonStyles.height,
       textAlign: 'center',
       userSelect: 'none',
+      textTransform: 'uppercase',
       transition: 'all .2s ease-in-out',
       '&:hover': {
         background: colorUtility(Colors.grey100, 0.2)
@@ -55,14 +53,7 @@ const styles = jss
     }
   }).attach()
 
-function initialState () {
-  return {
-    clicked: false
-  }
-}
-
 function render ({props, local, state, children}) {
-  const {hovering, clicked} = state
   const {
     label,
     style,
@@ -72,8 +63,6 @@ function render ({props, local, state, children}) {
   } = props
   return (
     <div
-      onMouseDown={local(mouseDown)}
-      onMouseUp={local(mouseUp)}
       class={[styles.classes.container, [primary && styles.classes.primary]]}
       style={style}>
       {label && label}
@@ -81,17 +70,4 @@ function render ({props, local, state, children}) {
   )
 }
 
-const reducer = combineReducers({
-  clicked: handleActions({
-    [mouseDown]: () => true,
-    [mouseUp]: () => false
-  })
-})
-
-export default {
-  initialState,
-  render,
-  reducer
-}
-
-// export default render
+export default { render }

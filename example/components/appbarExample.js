@@ -16,7 +16,7 @@ function render ({props, local, state}) {
   return (
     <AppBar
       title='Components'
-      iconElementRight={<FlatButton label='hello'/>}
+      iconElementRight={<FlatButton label='Sign In'/>}
       onRightElementClick={local(handleClick)}>
     </AppBar>
   )
